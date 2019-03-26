@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!-- Firestore setup -->
+    
+    <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-firestore.js"></script>
+    
+    
+    
+    <script>  
+        
+    // Initialize Cloud Firestore through Firebase
+firebase.initializeApp({
+  apiKey: ' AIzaSyBz_8vULQ_d_U24vt52nWeNNUCUaebglYM ',
+  authDomain: '### FIREBASE AUTH DOMAIN ###',
+  projectId: 'hachiko30007'
+});
+
+var db = firebase.firestore();
+        
+        
+    </script>
+   <style> 
+    </style>
+</head>
+    
+<body>
+
+<div id="input"> 
+    <form>
+    <!--    <input type="button" onclick= "alert('doggotime');
+            this.value = 'doggo';shippingno.value='doggo';
+            submitbutton.value='doggo';
+            testthis.innerHTML = 'doggo';
+            legend.innerHTML = 'doggo';
+            heading.innerHTML = 'doggo'" 
+            value = "summondoggo"
+            id = "funkybutton"> <br>  -->
+    <fieldset>
+        <legend id = "legend"> Hello brother </legend>
+        <h3 id = "heading"> You know what must be done.</h3>
+    <input type= "text" id="shippingno"  placeholder = "Shipping number goes here!" onfocus = "this.placeholder ''"><br>
+    <input type= "text" id= "parAdd" placeholder = "Customer's address here!" onfocus = "this.placeholder ''"><br>
+    <input type= "text" id="parPup"  placeholder = "pickup location goes here!" onfocus = "this.placeholder ''"><br>
+    <input type= "text" id= "parMod" placeholder = "hachiko model goes here!" onfocus = "this.placeholder ''"><br>
+    <input type= "text" id="parPer"  placeholder = "collection period goes here" onfocus = "this.placeholder ''"><br>
+    <input type= "text" id= "parLoc" placeholder = "current location of parcel" onfocus = "this.placeholder ''"><br>
+    <input type= "text" id="parStat"  placeholder = "status of parcel!" onfocus = "this.placeholder ''"><br>
+    <input type= "text" id= "parHachi" placeholder = "hachiko id goes here!" onfocus = "this.placeholder ''"><br>
+    <input type = "button" id="submitbutton" value = "Submit!" onclick = "upload()">
+      </fieldset>
+    
+    </form>
+    </div>
+    
+
+    
+    <script> 
+        
+        
+        function upload(){
+            var shippingno = document.getElementById("shippingno").value,
+                xparAdd = document.getElementById("parAdd").value,
+                xparPup = document.getElementById("parPup").value,
+                xparMod = document.getElementById("parMod").value,
+                xparPer = document.getElementById("parPer").value,
+                xparLoc = document.getElementById("parLoc").value,
+                xparStat = document.getElementById("parStat").value,
+                xparHachi = document.getElementById("parHachi").value;
+            
+            var condensed = {
+                    parAdd : '"' + xparAdd +'"',
+                    parPup : '"' + xparPup +'"',
+                    parMod : '"' + xparMod +'"',
+                    parPer : '"' + xparPer +'"',
+                    parLoc : '"' + xparLoc +'"',
+                    parStat: '"' + xparStat+'"',
+                    parHachi:'"' + xparHachi+'"'} ;
+            
+            db.collection("parcel").doc(shippingno).set(condensed);
+            
+            console.log('uploading the following: '+ shippingno + ": " + JSON.stringify(condensed));
+            
+        };
+    
+        
+      
+        
+        
+            
+              
+           
+        
+
+        
+        
+        
+        
+        
+    </script>
+    </body>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!-- Firestore setup -->
+    
+    <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-firestore.js"></script>
+    
+    
+    
+    <script>  
+        
+    // Initialize Cloud Firestore through Firebase
+firebase.initializeApp({
+  apiKey: ' AIzaSyBz_8vULQ_d_U24vt52nWeNNUCUaebglYM ',
+  authDomain: '### FIREBASE AUTH DOMAIN ###',
+  projectId: 'hachiko30007'
+});
+
+var db = firebase.firestore();
+        
+        
+    </script>
+   <style> 
+    </style>
+</head>
+    
+<body>
+
+<div id="input"> 
+    <form>
+    <!--    <input type="button" onclick= "alert('doggotime');
+            this.value = 'doggo';shippingno.value='doggo';
+            submitbutton.value='doggo';
+            testthis.innerHTML = 'doggo';
+            legend.innerHTML = 'doggo';
+            heading.innerHTML = 'doggo'" 
+            value = "summondoggo"
+            id = "funkybutton"> <br>  -->
+    <fieldset>
+        <legend id = "legend"> welcome to hachiko </legend>
+        <h3 id = "heading"> Put in your shipping tracking number here!</h3>
+    <input type= "text" id="shippingno"  placeholder = "Shipping number goes here!" onfocus = "this.placeholder ''"><br>
+    <input type = "button" id="submitbutton" value = "Submit!" onclick = "update(document.getElementById('shippingno').value)">
+      </fieldset>
+    
+    </form>
+    </div>
+    
+<div id ="output">
+    <fieldset> 
+        <legend id = "pulleddata">Here's your details! </legend> 
+        <p id = shipno> number goes here </p><br>
+        <p id = custPass> dicke  </p> <br>
+        <p id = custAdd> and </p> <br>
+        <p id = custPer> also </p> <br>
+        <p id = custMod> balle </p> <br>
+        <p id = custStatus> hehe </p> <br>
+        
+    
+    </fieldset>
+    </div>
+    
+    <script> 
+        var custPassword = "notpulled", custAddress = "notpulled", custPeriod = "notpulled", custModel = "goodboiio", shippingnumber = "notset";
+       var shippingnumber = document.getElementById("shippingno").value;
+        
+        document.getElementById("output").style.opacity = 0;
+        document.getElementById("output").style.transition = "opacity 1s";
+        
+        function update(shipid){
+            if (checkfield(shipid) == true) {
+                hibrandon(shipid,changevalues);
+                
+            } else {
+                console.log('update failed - checkfield false');
+            }
+           };
+        
+        function checkfield(input){
+      
+            if (input.length == 0) {
+                alert('The field is empty, my dude.');
+                return false;
+            }
+            return true;
+        };
+        
+        function hibrandon(shipid,callback){
+            db.collection("parcel").doc(shipid).get().then(function(doc){
+                if (doc.exists) {
+                  //  console.log("Document data:", doc.data());
+                  //  console.log(doc.data());
+                    var argus = doc.data();
+                    
+                                
+                    console.log("argus received:" + JSON.stringify(doc.data()));
+                    console.log("now changing values");
+                    callback(argus);
+                }
+                else {
+                    console.log("yo wtf");
+                    alert("I think you typed that wrong. Try again?");
+                }
+                }).catch(function(error){
+                console.log("error:", error);
+            });
+            };
+            
+            // this should call on the db.collection for the doc with id
+        
+        
+            
+              
+           
+        
+
+        
+        
+        function changevalues(argus){
+        custPassword = argus['parPass'];
+        custAddress = argus['parPup'];
+        custModel = argus['parMod'];
+        custPeriod = argus['parPer'];
+        custStatus = argus['parStat'];
+           
+          //writing over the htmls//
+        document.getElementById("shipno").innerHTML = "Order " + shippingnumber; 
+        document.getElementById("custPass").innerHTML = "Your password is " + " " + custPassword +".";
+        document.getElementById("custAdd").innerHTML = "Pick up your parcel at " + custAddress;
+        document.getElementById("custPer").innerHTML = "from " + custPeriod + ".";
+        document.getElementById("custMod").innerHTML = "You should look for a " + custModel + ".";
+        document.getElementById("custStatus").innerHTML = "Your parcel is " + custStatus + ".";
+        document.getElementById("output").style.opacity = 1;
+        }
+        
+        
+    </script>
+    </body>
