@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!-- Firestore setup -->
+    
+    <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-firestore.js"></script>
+    
+    
+    
+    <script>  
+        
+    // Initialize Cloud Firestore through Firebase
+firebase.initializeApp({
+  apiKey: ' AIzaSyBz_8vULQ_d_U24vt52nWeNNUCUaebglYM ',
+  authDomain: '### FIREBASE AUTH DOMAIN ###',
+  projectId: 'hachiko30007'
+});
+
+var db = firebase.firestore();
+        
+        
+    </script>
+   <style> 
+    </style>
+</head>
+    
+<body>
+    <div>
+    <fieldset>
+    <legend>json goes here</legend>
+    <p id = gimme></p> <br>
+    <input type = "button" id = "activation" value = "press!" onclick = "updateme(writetohtml)">
+    </fieldset>
+</div>
+    
+    <div id = "dankdiv"></div>
+        
+    <script> 
+    var hachijson = new Map();
+        
+    function updateme(callback){
+        console.log('summoning doggo from google');
+       db.collection("hachiko").get().then(function(querySnapshot) {
+           querySnapshot.forEach(function(doc) {
+               var adoc = String(doc.id);
+ //       console.log(adoc);
+  //      console.log(hachijson);
+        hachijson.set(adoc, doc.data())
+        console.log(hachijson);
+                 
+        
+                                                });
+           callback(hachijson);
+         
+  //         console.log(hachijson);
+                                                                    });
+        
+                                };  
+      
+    function writetohtml(themap){
+        console.log("ding");
+ //     
+        
+        var cat = new Map();
+        cat.set('1','arg');
+        cat.set('2','oof');
+        
+          themap.forEach((value,key)=>{ 
+              console.log("ping");
+              field = document.createElement("fieldset");
+              legen = document.createElement("legend");
+              legen.id = key + "leg";
+              legen.style.transition = 'all 0.5s';
+        //      console.log(value);
+        //      console.log(typeof(value));
+              field.addEventListener("mouseover", function(){document.getElementById(key).style.fontSize = '50px'; document.getElementById(key+"leg").style.fontSize = '30px';});
+              field.addEventListener("mouseout", function(){document.getElementById(key).style.fontSize = '15px';document.getElementById(key+"leg").style.fontSize = '20px';});
+            
+            
+              content = document.createElement('p');
+              content.id = key;
+              content.innerHTML = "Parcel 1: " + value["hachiPar1"] + '<br>' + "Parcel 2: " + value["hachiPar2"] + '<br>' + "Parcel 3: " + value["hachiPar3"];
+              content.style.transition = 'all 0.5s';
+              content.style.size = '10px';
+              
+            //  content.addEventListener("mouseover", function(){document.getElementById(key).style.fontSize = '50px'; console.log('cat');});
+      //        content.addEventListener("mouseout", function(){document.getElementById(key).style.fontSize = '10px'; console.log('dog');});
+              console.log(typeof(key));
+              legen.innerHTML = key;
+              field.appendChild(legen);
+              
+              field.appendChild(content);
+              document.getElementById('dankdiv').appendChild(field);
+          })  
+        };
+    
+  
+      
+        
+        
+    </script>
+    </body>
